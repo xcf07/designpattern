@@ -1,56 +1,56 @@
 #include <iostream>
 #include "Hand.h"
-#include "HighCardChecker.h"
-#include "PairChecker.h"
-#include "TwoPairChecker.h"
-#include "ThreeOfAKindChecker.h"
-#include "StraightChecker.h"
-#include "FlushChecker.h"
-#include "FullHouseChecker.h"
-#include "FourOfAKindChecker.h"
-#include "StraightFlushChecker.h"
-#include "RoyalFlushChecker.h"
-#include "FiveOfAKindChecker.h"
-#include "FlushHouseChecker.h"
-#include "FlushFiveChecker.h"
+#include "Checker/HighCardChecker.h"
+#include "Checker/PairChecker.h"
+#include "Checker/TwoPairChecker.h"
+#include "Checker/ThreeOfAKindChecker.h"
+#include "Checker/StraightChecker.h"
+#include "Checker/FlushChecker.h"
+#include "Checker/FullHouseChecker.h"
+#include "Checker/FourOfAKindChecker.h"
+#include "Checker/StraightFlushChecker.h"
+#include "Checker/RoyalFlushChecker.h"
+#include "Checker/FiveOfAKindChecker.h"
+#include "Checker/FlushHouseChecker.h"
+#include "Checker/FlushFiveChecker.h"
 
 int main() {
-    // Buat semua checker
-    HighCardChecker      highCard;
-    PairChecker          pair;
-    TwoPairChecker       twoPair;
-    ThreeOfAKindChecker  threeOfAKind;
-    StraightChecker      straight;
-    FlushChecker         flush;
-    FullHouseChecker     fullHouse;
-    FourOfAKindChecker   fourOfAKind;
+    HighCardChecker highCard;
+    PairChecker pair;
+    TwoPairChecker twoPair;
+    ThreeOfAKindChecker threeOfAKind;
+    StraightChecker straight;
+    FlushChecker flush;
+    FullHouseChecker fullHouse;
+    FourOfAKindChecker fourOfAKind;
     StraightFlushChecker straightFlush;
-    RoyalFlushChecker    royalFlush;
-    FiveOfAKindChecker   fiveOfAKind;
-    FlushHouseChecker    flushHouse;
-    FlushFiveChecker     flushFive;
+    RoyalFlushChecker royalFlush;
+    FiveOfAKindChecker fiveOfAKind;
+    FlushHouseChecker flushHouse;
+    FlushFiveChecker flushFive;
 
-    // Sambungkan chain (dari terendah ke tertinggi)
-    highCard.setNext(&pair);
-    pair.setNext(&twoPair);
-    twoPair.setNext(&threeOfAKind);
-    threeOfAKind.setNext(&straight);
-    straight.setNext(&flush);
-    flush.setNext(&fullHouse);
-    fullHouse.setNext(&fourOfAKind);
-    fourOfAKind.setNext(&straightFlush);
-    straightFlush.setNext(&royalFlush);
-    royalFlush.setNext(&fiveOfAKind);
-    fiveOfAKind.setNext(&flushHouse);
-    flushHouse.setNext(&flushFive);
+    // Chain dari tertinggi ke terendah
+    flushFive.setNext(&flushHouse);
+    flushHouse.setNext(&fiveOfAKind);
+    fiveOfAKind.setNext(&royalFlush);
+    royalFlush.setNext(&straightFlush);
+    straightFlush.setNext(&fourOfAKind);
+    fourOfAKind.setNext(&fullHouse);
+    fullHouse.setNext(&flush);
+    flush.setNext(&straight);
+    straight.setNext(&threeOfAKind);
+    threeOfAKind.setNext(&twoPair);
+    twoPair.setNext(&pair);
+    pair.setNext(&highCard);
 
-    // Test semua hand
     std::cout << "=== Testing All Hand Types ===\n\n";
+
     for (int i = 1; i <= 13; i++) {
         Hand hand;
         hand.value = i;
+
         std::cout << "Hand value " << i << ": ";
-        highCard.check(hand);
+        flushFive.check(hand);
     }
 
     return 0;

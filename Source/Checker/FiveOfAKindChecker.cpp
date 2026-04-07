@@ -7,5 +7,5 @@ HandRank FiveOfAKindChecker::check(const Hand& hand) {
         return HandRank::FIVE_OF_A_KIND;
     }
     if (nextChecker) return nextChecker->check(hand);
-    return HandRank::HIGH_CARD;
+    return HandRank::UNKNOWN;
 }

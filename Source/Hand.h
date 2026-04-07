@@ -1,18 +1,22 @@
 #pragma once
+
+enum class HandRank {
+    HIGH_CARD,
+    PAIR,
+    TWO_PAIR,
+    THREE_OF_A_KIND,
+    STRAIGHT,
+    FLUSH,
+    FULL_HOUSE,
+    FOUR_OF_A_KIND,
+    STRAIGHT_FLUSH,
+    ROYAL_FLUSH,
+    FIVE_OF_A_KIND,
+    FLUSH_HOUSE,
+    FLUSH_FIVE,
+    UNKNOWN
+};
+
 struct Hand {
     int value = 0;
-    // value sebagai simulasi:
-    // 1  = High Card
-    // 2  = Pair
-    // 3  = Two Pair
-    // 4  = Three of a Kind
-    // 5  = Straight
-    // 6  = Flush
-    // 7  = Full House
-    // 8  = Four of a Kind
-    // 9  = Straight Flush
-    // 10 = Royal Flush
-    // 11 = Five of a Kind
-    // 12 = Flush House
-    // 13 = Flush Five
 };
