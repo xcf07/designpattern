@@ -1,6 +1,6 @@
+#include <iostream>
 #include "HandPlayer.h"
 
-Hand HandPlayer::generateHand() {
-    Hand hand;
-    return hand;
+void HandPlayer::playHand(const Hand& hand) {
+    std::cout << "Player plays the hand.\n";
 }

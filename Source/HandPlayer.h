@@ -3,5 +3,5 @@
 
 class HandPlayer {
 public:
-    Hand generateHand();
+    void playHand(const Hand& hand);
 };
