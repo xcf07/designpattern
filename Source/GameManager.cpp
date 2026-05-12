@@ -1,35 +1,7 @@
-#include <iostream>
 #include "GameManager.h"
+#include <iostream>
 
 void GameManager::runSession() {
-    FlushFiveChecker flushFive;
-    FlushHouseChecker flushHouse;
-    FiveOfAKindChecker fiveOfAKind;
-    RoyalFlushChecker royalFlush;
-    StraightFlushChecker straightFlush;
-    FourOfAKindChecker fourOfAKind;
-    FullHouseChecker fullHouse;
-    FlushChecker flush;
-    StraightChecker straight;
-    ThreeOfAKindChecker threeOfAKind;
-    TwoPairChecker twoPair;
-    PairChecker pair;
-    HighCardChecker highCard;
-
-    // chain tertinggi ke terendah
-    flushFive.setNext(&flushHouse);
-    flushHouse.setNext(&fiveOfAKind);
-    fiveOfAKind.setNext(&royalFlush);
-    royalFlush.setNext(&straightFlush);
-    straightFlush.setNext(&fourOfAKind);
-    fourOfAKind.setNext(&fullHouse);
-    fullHouse.setNext(&flush);
-    flush.setNext(&straight);
-    straight.setNext(&threeOfAKind);
-    threeOfAKind.setNext(&twoPair);
-    twoPair.setNext(&pair);
-    pair.setNext(&highCard);
-
     std::cout << "=== Run Started ===\n";
     std::cout << "Generating cards for player...\n";
 
@@ -38,9 +10,10 @@ void GameManager::runSession() {
     std::cout << "Player selects cards to play...\n";
     handPlayer.generateHand();
 
-    std::cout << "Calculating hand score...\n";
-    flushFive.check(hand);
+    std::cout << "Checking poker hand...\n";
+    pokerHandChecker.check(hand);
 
+    std::cout << "Calculating hand score...\n";
     int score = scoringRule.scoreHand(hand);
     std::cout << "Final score = " << score << "\n";
 

@@ -1,26 +1,42 @@
-#pragma once
+#ifndef POKER_HAND_CHECKER_H
+#define POKER_HAND_CHECKER_H
+
 #include "Hand.h"
 
-enum class HandRank {
-    HIGH_CARD,
-    PAIR,
-    TWO_PAIR,
-    THREE_OF_A_KIND,
-    STRAIGHT,
-    FLUSH,
-    FULL_HOUSE,
-    FOUR_OF_A_KIND,
-    STRAIGHT_FLUSH,
-    ROYAL_FLUSH,
-    FIVE_OF_A_KIND,
-    FLUSH_HOUSE,
-    FLUSH_FIVE
-};
+#include "Checker/FlushFiveChecker.h"
+#include "Checker/FlushHouseChecker.h"
+#include "Checker/FiveOfAKindChecker.h"
+#include "Checker/RoyalFlushChecker.h"
+#include "Checker/StraightFlushChecker.h"
+#include "Checker/FourOfAKindChecker.h"
+#include "Checker/FullHouseChecker.h"
+#include "Checker/FlushChecker.h"
+#include "Checker/StraightChecker.h"
+#include "Checker/ThreeOfAKindChecker.h"
+#include "Checker/TwoPairChecker.h"
+#include "Checker/PairChecker.h"
+#include "Checker/HighCardChecker.h"
 
 class PokerHandChecker {
+private:
+    FlushFiveChecker flushFive;
+    FlushHouseChecker flushHouse;
+    FiveOfAKindChecker fiveOfAKind;
+    RoyalFlushChecker royalFlush;
+    StraightFlushChecker straightFlush;
+    FourOfAKindChecker fourOfAKind;
+    FullHouseChecker fullHouse;
+    FlushChecker flush;
+    StraightChecker straight;
+    ThreeOfAKindChecker threeOfAKind;
+    TwoPairChecker twoPair;
+    PairChecker pair;
+    HighCardChecker highCard;
+
 public:
-    virtual HandRank check(const Hand& hand) = 0;
-    void setNext(PokerHandChecker* next);
-protected:
-    PokerHandChecker* nextChecker = nullptr;
+    PokerHandChecker();
+
+    void check(Hand& hand);
 };
+
+#endif
