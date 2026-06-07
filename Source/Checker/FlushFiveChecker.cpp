@@ -8,9 +8,12 @@
 HandRank FlushFiveChecker::check(const Hand& hand) {
     auto counts = getRankCounts(hand);
     bool hasFive = false;
-    for (auto& [rank, count] : counts)
+    for (auto& entry : counts)
+{
+    int rank = entry.first;
+    int count = entry.second;
         if (count == 5) hasFive = true;
-
+}
     if (hasFive && allSameSuit(hand)) {
         std::cout << "Detected: FLUSH FIVE\n";
         return HandRank::FLUSH_FIVE;
