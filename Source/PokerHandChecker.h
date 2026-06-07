@@ -1,8 +1,7 @@
 #ifndef POKER_HAND_CHECKER_H
 #define POKER_HAND_CHECKER_H
 
-#include "Hand.h"
-
+#include "IHandChecker.h"
 #include "Checker/FlushFiveChecker.h"
 #include "Checker/FlushHouseChecker.h"
 #include "Checker/FiveOfAKindChecker.h"
@@ -19,23 +18,22 @@
 
 class PokerHandChecker {
 private:
-    FlushFiveChecker flushFive;
-    FlushHouseChecker flushHouse;
-    FiveOfAKindChecker fiveOfAKind;
-    RoyalFlushChecker royalFlush;
+    FlushFiveChecker    flushFive;
+    FlushHouseChecker   flushHouse;
+    FiveOfAKindChecker  fiveOfAKind;
+    RoyalFlushChecker   royalFlush;
     StraightFlushChecker straightFlush;
-    FourOfAKindChecker fourOfAKind;
-    FullHouseChecker fullHouse;
-    FlushChecker flush;
-    StraightChecker straight;
+    FourOfAKindChecker  fourOfAKind;
+    FullHouseChecker    fullHouse;
+    FlushChecker        flush;
+    StraightChecker     straight;
     ThreeOfAKindChecker threeOfAKind;
-    TwoPairChecker twoPair;
-    PairChecker pair;
-    HighCardChecker highCard;
+    TwoPairChecker      twoPair;
+    PairChecker         pair;
+    HighCardChecker     highCard;
 
 public:
     PokerHandChecker();
-
     void check(Hand& hand);
 };
 

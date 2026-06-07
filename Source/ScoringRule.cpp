@@ -2,23 +2,9 @@
 
 ScoringRule::ScoringRule() {}
 
+// scoreHand: menggunakan detectedRank yang sudah diisi oleh PokerHandChecker
 int ScoringRule::scoreHand(const Hand& hand) {
-    switch (hand.value) {
-        case 1:  return 5;
-        case 2:  return 10;
-        case 3:  return 20;
-        case 4:  return 30;
-        case 5:  return 40;
-        case 6:  return 50;
-        case 7:  return 60;
-        case 8:  return 70;
-        case 9:  return 100;
-        case 10: return 120;
-        case 11: return 140;
-        case 12: return 160;
-        case 13: return 200;
-        default: return 0;
-    }
+    return convertRankToScore(hand.detectedRank);
 }
 
 int ScoringRule::convertRankToScore(HandRank rank) {

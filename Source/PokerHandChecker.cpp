@@ -17,5 +17,6 @@ PokerHandChecker::PokerHandChecker() {
 }
 
 void PokerHandChecker::check(Hand& hand) {
-    flushFive.check(hand);
+    // Jalankan chain dan simpan hasilnya ke hand.detectedRank
+    hand.detectedRank = flushFive.check(hand);
 }

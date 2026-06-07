@@ -1,29 +1,57 @@
 #include "GameManager.h"
 #include <iostream>
+#include <limits>
+
+static void printActionMenu() {
+    std::cout << "\n  Pilih aksi:\n";
+    std::cout << "    [1] PLAY  - Mainkan blind ini\n";
+    std::cout << "    [2] SKIP  - Lewati blind ini (dapat reward command)\n";
+    std::cout << "    [0] QUIT  - Keluar dari permainan\n";
+    std::cout << "  >> Pilihan kamu: ";
+}
+
+static void flushInput() {
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
 
 void GameManager::runSession() {
-    std::cout << "=== Run Started ===\n";
-    std::cout << "Generating cards for player...\n";
+    std::cout << "\n";
+    std::cout << "  ╔══════════════════════════════════════════╗\n";
+    std::cout << "  ║     BALATRO - BLIND PROGRESSION SYSTEM   ║\n";
+    std::cout << "  ║         Design Pattern : State           ║\n";
+    std::cout << "  ╚══════════════════════════════════════════╝\n";
 
-    Hand hand = handGenerator.generateHand();
+    // Set state awal: Small Blind Ante 1
+    auto startState = std::make_shared<SmallBlindState>(1);
+    runtime.setState(startState);
 
-    std::cout << "Player selects cards to play...\n";
-    handPlayer.generateHand();
+    while (!runtime.isGameOver()) {
+        runtime.printStatus();
 
-    std::cout << "Checking poker hand...\n";
-    pokerHandChecker.check(hand);
+        BlindState* state = runtime.getState();
+        if (!state) break;
 
-    std::cout << "Calculating hand score...\n";
-    int score = scoringRule.scoreHand(hand);
-    std::cout << "Final score = " << score << "\n";
+        state->printInfo();
+        printActionMenu();
 
-    std::cout << "Checking blind requirement...\n";
-    bool win = blindRule.checkBlind(score);
-    std::cout << "Result: " << (win ? "WIN" : "LOSE") << "\n";
+        int choice = -1;
+        std::cin >> choice;
+        flushInput();
 
-    std::cout << "Calculating reward...\n";
-    int money = rewardRule.earnMoney(win, score);
-    std::cout << "Money gained: " << money << "\n";
+        switch (choice) {
+            case 1: state->play(runtime); break;
+            case 2: state->skip(runtime); break;
+            case 0:
+                std::cout << "\n  >> Permainan dihentikan. Sampai jumpa!\n\n";
+                return;
+            default:
+                std::cout << "\n  [!] Pilihan tidak valid. Coba lagi.\n";
+                break;
+        }
+    }
 
-    std::cout << "=== Run Ended ===\n";
+    std::cout << "\n  ============ RINGKASAN AKHIR ============\n";
+    runtime.printStatus();
+    std::cout << "\n  Terima kasih sudah bermain!\n\n";
 }

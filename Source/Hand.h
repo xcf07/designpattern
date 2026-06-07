@@ -1,9 +1,6 @@
 #pragma once
 #include <vector>
-#include "Card.h"  // DITAMBAHKAN: include Card.h karena Hand sekarang menyimpan vector<Card>
-
-// HandRank enum tetap dipertahankan dari versi temanmu
-// DITAMBAHKAN: UNKNOWN sebagai nilai default jika tidak ada hand yang terdeteksi
+#include "Checker/Card.h"
 
 enum class HandRank {
     HIGH_CARD,
@@ -23,9 +20,6 @@ enum class HandRank {
 };
 
 struct Hand {
-    // DIUBAH: sebelumnya 'int value = 0' yang hanya berupa angka dummy
-    // Sekarang Hand menyimpan kartu-kartu sungguhan menggunakan vector<Card>
-    // Setiap Card memiliki 'rank' (angka 2-14) dan 'suit' (H/D/C/S)
-    // Contoh isi cards: { {10,'H'}, {11,'H'}, {12,'H'}, {13,'H'}, {14,'H'} }
-    std::vector<Card> cards; 
+    std::vector<Card> cards;
+    HandRank detectedRank = HandRank::UNKNOWN; // DITAMBAHKAN: diisi oleh PokerHandChecker
 };
