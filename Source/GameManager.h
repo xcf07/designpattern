@@ -7,8 +7,10 @@
 #include "ScoringRule.h"
 #include "BlindRule.h"
 #include "RewardRule.h"
-#include "GameRuntime.h"           // DITAMBAHKAN
-#include "ConcreteBlindStates.h"   // DITAMBAHKAN
+#include "GameRuntime.h"
+#include "SmallBlindState.h"   // masing-masing diinclude terpisah
+#include "BigBlindState.h"
+#include "BossBlindState.h"
 
 class GameManager {
 private:
@@ -18,7 +20,7 @@ private:
     ScoringRule      scoringRule;
     BlindRule        blindRule;
     RewardRule       rewardRule;
-    GameRuntime      runtime;      // DITAMBAHKAN: session state
+    GameRuntime      runtime;
 
 public:
     void runSession();
